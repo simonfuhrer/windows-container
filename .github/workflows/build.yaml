@@ -1,0 +1,28 @@
+name: CI Workflow
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  build-containers:
+    name: Build Containers
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: False
+      max-parallel: 1
+      matrix:
+        os: [windows-2022]
+        include:
+        - os: windows-2022
+          base: nanoserver-ltsc2022
+          file: Dockerfile
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Docker Build
+      run: |
+                docker build -f ${{ matrix.file }} --build-arg BASE=${{ matrix.base }} .
