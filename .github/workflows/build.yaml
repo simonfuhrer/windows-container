@@ -19,6 +19,7 @@ jobs:
         include:
         - os: windows-2022
           file: Dockerfile
+          tag: ghcr.io/simonfuhrer/microsoftdsc365:${{ github.sha }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -27,7 +28,10 @@ jobs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}      
+        password: ${{ secrets.GITHUB_TOKEN }}
     - name: Docker Build
       run: |
-                docker build -f ${{ matrix.file }} .
+                docker build -f ${{ matrix.file }} -t ${{ matrix.tag }} .
+    - name: Docker Push
+      run: |
+                docker push ${{ matrix.tag }}

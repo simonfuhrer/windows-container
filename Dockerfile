@@ -3,7 +3,6 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 
 
 RUN Install-PackageProvider -Name NuGet -Force -Scope CurrentUser ; \
-    Register-PSRepository -Default -InstallationPolicy Trusted -verbose ; \
     Install-Module -Name NetworkingDsc -force -Confirm:$false ; \
     Install-Module -Name Microsoft365DSC -RequiredVersion 1.22.615.1 -force -Confirm:$false ; \
     Update-M365DSCDependencies
