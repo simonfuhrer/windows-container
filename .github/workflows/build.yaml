@@ -24,4 +24,4 @@ jobs:
       uses: actions/checkout@v2
     - name: Docker Build
       run: |
-                docker build -f ${{ matrix.file }}
+                docker build -f ${{ matrix.file }} .
