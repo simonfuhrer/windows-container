@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/windows/servercore:ltsc2022
+FROM mcr.microsoft.com/windows/server:ltsc2022
 
 RUN Install-PackageProvider -Name NuGet -Force -Scope CurrentUser ; \
     Register-PSRepository -Default -InstallationPolicy Trusted -verbose ; \
